@@ -1,6 +1,6 @@
-insert into users (username, password) values ('admin', 'pass');
-insert into users (username, password) values ('user1', 'pass1');
-insert into users (username, password) values ('user2', 'pass2');
+insert into users (username, password) values ('admin', '$2a$10$pWy1aRsO1I70vTLE96xwBunm2OahTJjiaRwDd2IdJzmIZtfJqku8y');
+insert into users (username, password) values ('user1', '$2a$10$ehh1c1MQ2OPzK695IJLL7eKEjUgCiVd8hyNmY.vOdm9nn0XYB0R8q');
+insert into users (username, password) values ('user2', '$2a$10$JRK311OxFPkLCpkKCLJzJOrcbT.ZHv2fH6zTL21n5gJwGKMZJURhe');
 
 insert into user_roles (user_role, username) values ('USER', 'user1');
 insert into user_roles (user_role, username) values ('USER', 'user2');
