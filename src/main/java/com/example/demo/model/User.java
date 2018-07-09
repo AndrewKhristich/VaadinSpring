@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -33,21 +32,18 @@ public class User implements UserDetails, Serializable {
 
     @Column(name = "non_expired")
     @JsonIgnore
-    @Nullable
+    @NotNull
     private boolean accountNonExpired;
 
     @Column(name = "non_locked")
-    @Nullable
     private boolean accountNonLocked;
 
     @Column(name = "credentials_non_expired")
     @JsonIgnore
-    @Nullable
     private boolean credentialsNonExpired;
 
     @Column(name = "enabled")
     @JsonIgnore
-    @Nullable
     private boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL,
@@ -64,37 +60,21 @@ public class User implements UserDetails, Serializable {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Issue> issues = new ArrayList<>();
 
-    @Override
-    public String getUsername() {
-        return username;
+    public User() {
+    }
+
+    public User(@NotNull @Size(min = 1, max = 20) String username, @NotNull @Size(min = 5) String password) {
+        this.username = username;
+        this.password = password;
     }
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
-    public List<UserRole> getAuthorities() {
-        return authorities;
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                ", issues=" + issues +
+                '}';
     }
 }

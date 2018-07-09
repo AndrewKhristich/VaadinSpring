@@ -3,10 +3,10 @@ create table users
   username                varchar(20)  not null
     constraint users_pkey
     primary key,
-  non_expired             boolean,
-  non_locked              boolean,
-  credentials_non_expired boolean,
-  enabled                 boolean,
+  non_expired             boolean not null default true,
+  non_locked              boolean not null default true,
+  credentials_non_expired boolean not null default true,
+  enabled                 boolean not null default true,
   password                varchar(255) not null
 );
 

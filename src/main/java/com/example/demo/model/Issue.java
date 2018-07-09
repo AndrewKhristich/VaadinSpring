@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import org.apache.catalina.LifecycleState;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -40,4 +39,14 @@ public class Issue {
             mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", issueName='" + issueName + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", publishedAt=" + publishedAt +
+                '}';
+    }
 }

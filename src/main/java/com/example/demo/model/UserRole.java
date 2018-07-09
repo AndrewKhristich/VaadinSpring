@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
-import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -25,7 +24,10 @@ public class UserRole implements GrantedAuthority {
     private String authority;
 
     @Override
-    public String getAuthority() {
-        return authority;
+    public String toString() {
+        return "UserRole{" +
+                "id=" + id +
+                ", authority='" + authority + '\'' +
+                '}';
     }
 }
