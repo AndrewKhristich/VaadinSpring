@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -32,17 +33,21 @@ public class User implements UserDetails, Serializable {
 
     @Column(name = "non_expired")
     @JsonIgnore
+    @Nullable
     private boolean accountNonExpired;
 
     @Column(name = "non_locked")
+    @Nullable
     private boolean accountNonLocked;
 
     @Column(name = "credentials_non_expired")
     @JsonIgnore
+    @Nullable
     private boolean credentialsNonExpired;
 
     @Column(name = "enabled")
     @JsonIgnore
+    @Nullable
     private boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL,

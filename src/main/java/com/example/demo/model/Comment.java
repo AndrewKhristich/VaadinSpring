@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -24,9 +26,14 @@ public class Comment {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "author")
+    @Size(max = 20)
+    @NotNull
+    private String author;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
-    @JoinColumn(name = "issue")
+    @JoinColumn(name = "issue_id")
     private Issue issue;
 
 }
