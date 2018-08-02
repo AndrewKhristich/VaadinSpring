@@ -1,7 +1,7 @@
 package com.example.demo.dao.impl;
 
 import com.example.demo.dao.UserDao;
-import com.example.demo.exception.UserAlreadyExists;
+import com.example.demo.exception.UserAlreadyExistsException;
 import com.example.demo.model.User;
 import com.example.demo.model.UserRole;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class UserDaoImpl implements UserDao {
     public void saveUser(String username, String password) {
         User user = em.find(User.class, username);
         if (user!=null){
-            throw new UserAlreadyExists("User already exists");
+            throw new UserAlreadyExistsException("User already exists");
         }
         User entity = new User(username, password);
         entity.setAccountNonExpired(true);

@@ -21,7 +21,7 @@ public class User implements UserDetails, Serializable {
     @Id
     @Column(name = "username", unique = true)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 15)
     private String username;
 
     @Column(name = "password", nullable = false)

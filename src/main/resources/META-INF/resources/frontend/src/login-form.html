@@ -1,0 +1,18 @@
+<dom-module id="login-form">
+    <template>
+        <table>
+            <tr><td>Login</td> <td><vaadin-text-field id='name'>{{name}}</vaadin-text-field></td></tr>
+            <tr><td>Password</td> <td><vaadin-password-field id='password'>{{lastname}}</vaadin-password-field></td></tr>
+        </table>
+        <div style="width: fit-content; margin-left: auto; margin-right: auto">
+        <vaadin-button id='submit' on-click='login'>Register</vaadin-button>
+        <vaadin-button id='cancel' on-click='cancel'>Cancel</vaadin-button>
+        </div>
+    </template>
+    <script>
+        class LoginForm extends Polymer.Element {
+            static get is() {return 'login-form'}
+        }
+        customElements.define(LoginForm.is, LoginForm);
+    </script>
+</dom-module>
