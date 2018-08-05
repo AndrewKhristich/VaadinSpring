@@ -2,32 +2,26 @@ package com.example.demo.front.components.menu;
 
 import com.example.demo.front.views.IssueListView;
 import com.example.demo.front.views.MyIssueList;
+import com.example.demo.utils.Layouts;
 import com.example.demo.utils.SecurityUtil;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.router.RouterLink;
-
-import java.util.stream.Stream;
 
 
 public class SideMenu extends HorizontalLayout implements RouterLayout {
 
+    private final Tab allIssuesTab;
+    private final Tab myIssues;
+    private final Tabs tabs;
+
     public SideMenu() {
-//        addClassNames("container");
 
-        Tab allIssuesTab = new NavigableTab("All Issues",IssueListView.class);
-        Tab myIssues = new NavigableTab("My Issues", MyIssueList.class);
+        this.allIssuesTab = new NavigableTab("All Issues", IssueListView.class);
+        this.myIssues = new NavigableTab("My Issues", MyIssueList.class);
+        this.tabs = new Tabs();
 
-        Tabs tabs = new Tabs();
         tabs.add(allIssuesTab);
 
         if (SecurityUtil.isAuthenticated()) {
@@ -37,5 +31,17 @@ public class SideMenu extends HorizontalLayout implements RouterLayout {
         tabs.setHeight("40px");
 
         add(tabs);
+    }
+
+    public void setSelected(Layouts layouts) {
+        switch (layouts) {
+            case MY_ISSUE:
+                tabs.setSelectedTab(myIssues);
+                break;
+            case All_ISSUES:
+                tabs.setSelectedTab(allIssuesTab);
+                break;
+            default: tabs.setSelectedTab(allIssuesTab);
+        }
     }
 }

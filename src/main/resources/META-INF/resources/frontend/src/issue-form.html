@@ -1,0 +1,16 @@
+<dom-module id="issue-form">
+    <template>
+        <label id="author" style="font-weight: bold; font-size: 140%;">{{author}}</label><br/>
+        <label>Issue</label><br/>
+        <vaadin-text-field id="name">{{name}}</vaadin-text-field><br/>
+        <label>Description</label><br/>
+        <vaadin-text-area id="description">{{description}}</vaadin-text-area><br/>
+        <vaadin-button id="submit" on-click='save'>Create</vaadin-button>
+    </template>
+    <script>
+        class IssueForm extends Polymer.Element {
+            static get is() {return 'issue-form'}
+        }
+        customElements.define(IssueForm.is, IssueForm);
+    </script>
+</dom-module>

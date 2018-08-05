@@ -37,7 +37,7 @@ public class LoginForm extends PolymerTemplate<TemplateModel> {
     private User user;
     private Dialog dialog;
 
-    public LoginForm(UserService service, Dialog dialog) {
+    public LoginForm(UserService service) {
         this.service = service;
         this.binder = new Binder<>(User.class);
         this.user = new User("","");
@@ -53,6 +53,7 @@ public class LoginForm extends PolymerTemplate<TemplateModel> {
         String passwordValue = password.getValue();
         try {
             service.authenticate(nameValue, passwordValue);
+            getDialogAndClose();
             PageUtils.reloadPage();
         } catch (Exception e) {
             password.setValue("");
@@ -63,8 +64,17 @@ public class LoginForm extends PolymerTemplate<TemplateModel> {
 
     @EventHandler
     private void cancel() {
-        dialog.close();
+        getDialogAndClose();
         name.setValue("");
+    }
+
+    private void getDialogAndClose() {
+        getParent().ifPresent(component -> {
+            if (component instanceof Dialog) {
+                Dialog component1 = (Dialog) component;
+                component1.close();
+            }
+        });
     }
 
 }

@@ -9,4 +9,8 @@ public interface IssueDao {
     List<Issue> findIssuesByUsername(String username);
     List<Comment> findIssueCommentsById(Long id);
     List<Issue> findAllIssues();
+
+    Issue findById(Long parameter);
+
+    void save(Issue issue);
 }

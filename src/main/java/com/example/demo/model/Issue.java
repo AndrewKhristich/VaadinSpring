@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,12 +19,14 @@ public class Issue {
     private Long id;
 
     @Column(name = "issue_name")
+    @Size(min = 4, max = 30)
     private String issueName;
 
     @Column(name = "status")
     private String status;
 
     @Column(name = "description")
+    @Size(min = 10, max = 50)
     private String description;
 
     @Column(name = "publish_date")

@@ -31,6 +31,17 @@ public class IssueDaoImpl implements IssueDao {
 
     @Override
     public List<Issue> findAllIssues() {
-        return em.createQuery("from Issue", Issue.class).getResultList();
+        return em.createQuery("from Issue iss order by iss.publishedAt desc", Issue.class).getResultList();
+    }
+
+    @Override
+    public Issue findById(Long parameter) {
+        return em.createQuery("from Issue iss where iss.id = ?1", Issue.class)
+                .setParameter(1, parameter).getSingleResult();
+    }
+
+    @Override
+    public void save(Issue issue) {
+        em.merge(issue);
     }
 }
