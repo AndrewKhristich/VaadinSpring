@@ -13,4 +13,6 @@ public interface IssueDao {
     Issue findById(Long parameter);
 
     void save(Issue issue);
+
+    void saveComment(Comment comment);
 }

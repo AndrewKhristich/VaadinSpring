@@ -36,4 +36,7 @@ public class Comment {
     @JoinColumn(name = "issue_id")
     private Issue issue;
 
+    public Comment() {
+        this.publishedAt = new Date();
+    }
 }

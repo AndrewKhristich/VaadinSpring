@@ -44,4 +44,9 @@ public class IssueDaoImpl implements IssueDao {
     public void save(Issue issue) {
         em.merge(issue);
     }
+
+    @Override
+    public void saveComment(Comment comment) {
+        em.merge(comment);
+    }
 }

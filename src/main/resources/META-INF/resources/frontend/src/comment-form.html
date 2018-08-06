@@ -1,0 +1,15 @@
+<dom-module id="comment-form">
+    <template>
+        <div id="form" style="border: 1px solid #e8ebef">
+            <vaadin-text-area id='descr'>{{decr}}</vaadin-text-area>
+            <vaadin-button id='submit' on-click='comment'>Comment</vaadin-button>
+            <vaadin-checkbox id='resolve'>Resolve Issue?</vaadin-checkbox>
+        </div>
+    </template>
+    <script>
+        class CommentForm extends Polymer.Element {
+            static get is() {return 'comment-form'}
+        }
+        customElements.define(CommentForm.is, CommentForm);
+    </script>
+</dom-module>
