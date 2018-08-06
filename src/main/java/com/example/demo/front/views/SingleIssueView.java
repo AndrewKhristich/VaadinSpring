@@ -76,12 +76,6 @@ public class SingleIssueView extends AbstractLayout implements HasUrlParameter<L
         name.getStyle().set("font-weight", "bold");
         name.getStyle().set("font-size", "150%");
 
-        if (status.getText().equals("Resolved")) {
-            status.getStyle().set("background-color", "green");
-        } else {
-            status.getStyle().set("background-color", "red");
-        }
-
         status.getStyle().set("color", "white");
         status.getStyle().set("border-radius", "5px");
     }
@@ -99,6 +93,12 @@ public class SingleIssueView extends AbstractLayout implements HasUrlParameter<L
         descr.setText(issue.getDescription());
         status.setText(issue.getStatus());
         date.setText(issue.getPublishedAt().toString());
+
+        if (issue.getStatus().equals("Resolved")) {
+            status.getStyle().set("background-color", "green");
+        } else {
+            status.getStyle().set("background-color", "red");
+        }
 
         List<Comment> issueComments = issueService.findIssueComments(parameter);
         issueComments.forEach(comment -> comments.add(new CommentDiv(comment)));
