@@ -1,5 +1,6 @@
 package com.example.demo.front.components.auth;
 
+import com.example.demo.exception.UserAlreadyExistsException;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.PageUtils;
@@ -73,7 +74,7 @@ public class RegistrationForm extends PolymerTemplate<TemplateModel>
             userService.saveUser(userName, password);
             userService.authenticate(userName, password);
             PageUtils.reloadPage();
-        } catch (ValidationException e) {
+        } catch (ValidationException | UserAlreadyExistsException e) {
             Notification.show(e.getMessage(),3000,Notification.Position.TOP_CENTER);
         }
     }

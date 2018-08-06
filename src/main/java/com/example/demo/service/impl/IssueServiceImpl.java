@@ -2,8 +2,10 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.IssueDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.model.Comment;
 import com.example.demo.model.Issue;
 import com.example.demo.service.IssueService;
+import com.example.demo.utils.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,22 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public List<Issue> findAllOfCurrentUser(String currentUser) {
         return issueDao.findIssuesByUsername(currentUser);
+    }
+
+    @Override
+    public List<Comment> findIssueComments(Long parameter) {
+        return issueDao.findIssueCommentsById(parameter);
+    }
+
+    @Override
+    public void saveComment(Comment comment, Long issueId) {
+        comment.setAuthor(SecurityUtil.getAuthorizedUsername());
+        Issue issue = new Issue();
+        issue.setId(issueId);
+        comment.setIssue(issue);
+        if (comment.getStatus()!=null && comment.getStatus().equals("Resolved")) {
+            issueDao.resolveIssueById(issueId);
+        }
+        issueDao.saveComment(comment);
     }
 }

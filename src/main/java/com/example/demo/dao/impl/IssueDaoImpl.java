@@ -31,7 +31,7 @@ public class IssueDaoImpl implements IssueDao {
 
     @Override
     public List<Issue> findAllIssues() {
-        return em.createQuery("from Issue iss order by iss.publishedAt desc", Issue.class).getResultList();
+        return em.createQuery("from Issue iss", Issue.class).getResultList();
     }
 
     @Override
@@ -43,5 +43,23 @@ public class IssueDaoImpl implements IssueDao {
     @Override
     public void save(Issue issue) {
         em.merge(issue);
+    }
+
+    @Override
+    public void saveComment(Comment comment) {
+        em.createNativeQuery("insert into issue_comments (description, publish_date, status, issue_id, author) " +
+                "values (?1, ?2, ?3, ?4, ?5)")
+        .setParameter(1, comment.getDescription())
+        .setParameter(2, comment.getPublishedAt())
+        .setParameter(3, comment.getStatus())
+        .setParameter(4, comment.getIssue().getId())
+        .setParameter(5, comment.getAuthor())
+                .executeUpdate();
+    }
+
+    @Override
+    public void resolveIssueById(Long issueId) {
+        em.createNativeQuery("update issues set status = 'Resolved' where id=?1")
+                .setParameter(1, issueId).executeUpdate();
     }
 }

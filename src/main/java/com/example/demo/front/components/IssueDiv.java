@@ -29,6 +29,8 @@ public class IssueDiv extends Div {
         this.issue = issue;
         Icon alarm = new Icon(VaadinIcon.CROSS_CUTLERY);
         Icon access = new Icon(VaadinIcon.CHECK);
+        alarm.setColor("red");
+        access.setColor("green");
 
         Label name = new Label(issue.getIssueName());
         Date publishedAt = issue.getPublishedAt();

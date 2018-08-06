@@ -16,7 +16,11 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.templatemodel.TemplateModel;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Tag("issue-form")
 @HtmlImport("src/issue-form.html")
@@ -38,8 +42,11 @@ public class IssueForm extends PolymerTemplate<TemplateModel> {
     private final BeanValidationBinder<Issue> binder;
     private final IssueService service;
     private final String username;
+    private ListDataProvider provider;
 
-    public IssueForm(IssueService service) {
+    public IssueForm(ListDataProvider provider, IssueService service) {
+        this.provider = provider;
+
         this.binder = new BeanValidationBinder<>(Issue.class);
         this.service = service;
         this.username = SecurityUtil.getAuthorizedUsername();
@@ -51,6 +58,10 @@ public class IssueForm extends PolymerTemplate<TemplateModel> {
         binder.setBean(issue);
         binder.bind(name, "issueName");
         binder.bind(description, "description");
+
+        description.setHeight("50%");
+        description.setWidth("100%");
+        name.setWidth("100%");
 
     }
 
@@ -67,7 +78,8 @@ public class IssueForm extends PolymerTemplate<TemplateModel> {
                         component1.close();
                     }
                 });
-                PageUtils.reloadPage();
+                provider.getItems().add(issue);
+                provider.refreshAll();
             }
         } catch (Exception e) {
             Notification.show("Some Error", 3000, Notification.Position.TOP_CENTER);

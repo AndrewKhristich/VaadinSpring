@@ -14,6 +14,7 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.templatemodel.TemplateModel;
 
 @Tag("login-form")
@@ -38,7 +39,7 @@ public class LoginForm extends PolymerTemplate<TemplateModel> {
     private Dialog dialog;
 
     public LoginForm(UserService service) {
-        this.service = service;
+                this.service = service;
         this.binder = new Binder<>(User.class);
         this.user = new User("","");
         this.dialog = dialog;

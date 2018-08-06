@@ -24,6 +24,7 @@ public class Comment {
     private String status;
 
     @Column(name = "description")
+    @Size(min = 1, max = 50)
     private String description;
 
     @Column(name = "author")
@@ -36,4 +37,7 @@ public class Comment {
     @JoinColumn(name = "issue_id")
     private Issue issue;
 
+    public Comment() {
+        this.publishedAt = new Date();
+    }
 }
